@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listview);
+        //safe commit
 
         ArrayList<Personas> personas = new ArrayList<Personas>();
 
