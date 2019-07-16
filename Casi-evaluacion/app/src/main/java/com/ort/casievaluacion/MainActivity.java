@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listview);
         toolbar1 = findViewById(R.id.toolbar);
-        add = findViewById(R.id.floatingActionButton);
+        floatingActionButton = findViewById(R.id.floatingActionButton);
 
         setSupportActionBar(toolbar1);
         // esto es para la flechita de atras
