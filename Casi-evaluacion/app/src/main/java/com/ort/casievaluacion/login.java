@@ -37,7 +37,7 @@ public class login extends AppCompatActivity {
         contrasena = findViewById(R.id.editPass);
         checkBox = findViewById(R.id.checkBox1);
 
-        Personas persona = new Personas("Leonel","Braginski","leobraginski@gmail.com","oliver");
+        persona = new Personas("Leonel","Braginski","leobraginski@gmail.com","oliver");
 
         cargarpreferencias();
 
@@ -86,8 +86,11 @@ public class login extends AppCompatActivity {
                 editor.putString("user", persona.getEmail());
                 editor.putString("pass", persona.getPass().toString());
                 editor.commit();
-                startActivity(intent);
             }
+            startActivity(intent);
+        }else
+        {
+            Toast.makeText(login.this,"Error al loguearse",Toast.LENGTH_LONG).show();
         }
     }
 
