@@ -5,19 +5,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private Toolbar toolbar;
+    private Toolbar toolbar1;
     private Adapter1 adapter1;
     private ListView listView;
-    private TextView toolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,20 +27,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listview);
-        //safe commit
+        toolbar1 = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar1);
+        // esto es para la flechita de atras
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Bienvenido usuario logueado");
 
         ArrayList<Personas> personas = new ArrayList<Personas>();
 
+        personas.add(new Personas("Leonel","Braginski","leobraginski@gmail.com"));
+
         adapter1 = new Adapter1(this,personas);
         listView.setAdapter(adapter1);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        toolbarTitle.setText("Bienvenido... (aca viene el user logueado)");
-        toolbar.setTitle("");
     }
 
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        switch (item.getItemId())
+        {
+            case R.id.action_show:
+
+                Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show();
+
+                break;
+        }
+
+        return true;
+    }
 
     class Adapter1 extends ArrayAdapter<Personas>
     {
