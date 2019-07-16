@@ -5,11 +5,21 @@ public class Personas
     private String nombre;
     private String appelido;
     private String email;
+    private String pass;
 
-    public Personas(String nombre, String appelido, String email) {
+    public Personas(String nombre, String appelido, String email, String pass) {
         this.nombre = nombre;
         this.appelido = appelido;
         this.email = email;
+        this.pass = pass;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public String getNombre() {

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Personas> personas = new ArrayList<Personas>();
 
-        personas.add(new Personas("Leonel","Braginski","leobraginski@gmail.com"));
+        personas.add(new Personas("Leonel","Braginski","leobraginski@gmail.com","oliver"));
 
         adapter1 = new Adapter1(this,personas);
         listView.setAdapter(adapter1);
