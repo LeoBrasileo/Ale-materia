@@ -1,6 +1,7 @@
 package com.ort.casievaluacion;
 
 import android.app.Activity;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar1;
     private Adapter1 adapter1;
     private ListView listView;
+    private FloatingActionButton add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listview);
         toolbar1 = findViewById(R.id.toolbar);
+        add = findViewById(R.id.floatingActionButton);
 
         setSupportActionBar(toolbar1);
         // esto es para la flechita de atras
@@ -40,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
 
         adapter1 = new Adapter1(this,personas);
         listView.setAdapter(adapter1);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu)
