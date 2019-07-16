@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar1;
     private Adapter1 adapter1;
     private ListView listView;
-    private FloatingActionButton add;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         adapter1 = new Adapter1(this,personas);
         listView.setAdapter(adapter1);
 
-        add.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
