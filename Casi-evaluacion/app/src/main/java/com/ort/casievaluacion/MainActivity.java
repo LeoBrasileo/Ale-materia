@@ -1,6 +1,10 @@
 package com.ort.casievaluacion;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,10 +36,15 @@ public class MainActivity extends AppCompatActivity {
         toolbar1 = findViewById(R.id.toolbar);
         floatingActionButton = findViewById(R.id.floatingActionButton);
 
+        ConexionSQLiteHelper conexionSQLiteHelper = new ConexionSQLiteHelper(this,"bd_personas",null,1);
+
+        final Bundle bundle = this.getIntent().getExtras();
+        String nombreuser = bundle.getString("nombreuser");
+
         setSupportActionBar(toolbar1);
         // esto es para la flechita de atras
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Bienvenido usuario logueado");
+        getSupportActionBar().setTitle("Bienvenido " + nombreuser);
 
         ArrayList<Personas> personas = new ArrayList<Personas>();
 
@@ -47,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent =
+                        new Intent(MainActivity.this,RegistrarPersona.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
@@ -71,6 +83,20 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show();
 
+                break;
+
+            case R.id.action_logout:
+                SharedPreferences sharedPreferences = getSharedPreferences
+                        ("credenciales", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("user","");
+                editor.putString("pass","");
+                editor.commit();
+
+                Intent intent =
+                        new Intent(MainActivity.this,login.class);
+                startActivity(intent);
+                finish();
                 break;
         }
 

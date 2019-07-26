@@ -14,6 +14,8 @@ public class Personas
         this.pass = pass;
     }
 
+    Personas(){}
+
     public String getPass() {
         return pass;
     }
