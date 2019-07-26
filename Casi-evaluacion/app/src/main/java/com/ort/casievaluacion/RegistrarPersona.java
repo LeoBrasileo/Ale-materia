@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,7 +61,22 @@ public class RegistrarPersona extends AppCompatActivity {
     }
 
     private void registrarUsuarioFirebase(final String nombre, final String apellido, final String mail, final String password) {
-        //String mail1 = mail.replaceAll("[^.com]", "");
+        if (TextUtils.isEmpty(nombre)) {
+            Toast.makeText(this, "Indique su nombre", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(apellido)) {
+            Toast.makeText(this, "Indique su apellido", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Se debe ingresar una contraseña", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(mail)) {
+            Toast.makeText(this, "Indique su E-Mail", Toast.LENGTH_LONG).show();
+            return;
+        }
         final String mailsincom = mail.replace(".com","");
         personas.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
