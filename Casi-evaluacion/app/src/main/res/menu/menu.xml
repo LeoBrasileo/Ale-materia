@@ -9,12 +9,6 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/action_add"
-        android:icon="@drawable/ic_action_add_circle"
-        android:title="Agregar"
-        app:showAsAction="never"/>
-
-    <item
         android:id="@+id/action_remove"
         android:title="Eliminar"
         app:showAsAction="never"/>

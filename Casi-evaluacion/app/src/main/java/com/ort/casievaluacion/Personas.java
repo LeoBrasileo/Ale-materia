@@ -3,13 +3,13 @@ package com.ort.casievaluacion;
 public class Personas
 {
     private String nombre;
-    private String appelido;
+    private String apellido;
     private String email;
     private String pass;
 
-    public Personas(String nombre, String appelido, String email, String pass) {
+    public Personas(String nombre, String apellido, String email, String pass) {
         this.nombre = nombre;
-        this.appelido = appelido;
+        this.apellido = apellido;
         this.email = email;
         this.pass = pass;
     }
@@ -32,12 +32,12 @@ public class Personas
         this.nombre = nombre;
     }
 
-    public String getAppelido() {
-        return appelido;
+    public String getApelido() {
+        return apellido;
     }
 
-    public void setAppelido(String appelido) {
-        this.appelido = appelido;
+    public void setApelido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getEmail() {

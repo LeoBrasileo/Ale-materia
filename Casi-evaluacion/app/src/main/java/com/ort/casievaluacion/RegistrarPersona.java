@@ -46,8 +46,8 @@ public class RegistrarPersona extends AppCompatActivity {
         personas = database.getReference("personas");
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Registrar a un nuevo Usuario");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Registrar a un nuevo usuario");
 
         Registrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +86,7 @@ public class RegistrarPersona extends AppCompatActivity {
                 Intent intent =
                         new Intent(RegistrarPersona.this,MainActivity.class);
                 Bundle bundle = RegistrarPersona.this.getIntent().getExtras();
+                bundle.putString("mailsincom",mailsincom);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

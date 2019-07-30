@@ -101,6 +101,7 @@ public class login extends AppCompatActivity {
                                 editor.commit();
                             }
                             Bundle bundle = new Bundle();
+                            bundle.putString("mailsincom",mailsincom);
                             bundle.putString("nombreuser",login1.getNombre());
                             intent.putExtras(bundle);
                             startActivity(intent);
