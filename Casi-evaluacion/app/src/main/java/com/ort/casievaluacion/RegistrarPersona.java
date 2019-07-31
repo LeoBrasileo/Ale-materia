@@ -89,6 +89,7 @@ public class RegistrarPersona extends AppCompatActivity {
                 bundle.putString("mailsincom",mailsincom);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                finish();
             }
 
             @Override

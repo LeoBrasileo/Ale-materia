@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference todo;
     private DatabaseReference personasdb;
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -114,52 +115,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
+    public boolean onOptionsItemSelected(final MenuItem item)
     {
 
         switch (item.getItemId())
         {
-            case R.id.action_show:
-
-                Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show();
-
-                break;
 
             case R.id.action_remove:
-                Toast.makeText(this, "Selecciona que persona eliminar", Toast.LENGTH_SHORT).show();
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
-                        if (position == 0)
-                        {
-                            return;
-                        }
 
-
-                        //necesito eliminar la rama del usuario que toco, para eso tengo que conseguir su mail al apretarlo
-                        Adapter1 adapter = (Adapter1) listView.getAdapter();
-                        ArrayList<Personas> listPersonas = adapter.getArrayList();
-
-                        String mail = String.valueOf(listPersonas.get(position).getEmail());
-                        final String mailsincom = mail.replace(".com","");
-
-
-
-                        personasdb.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Personas eliminar = dataSnapshot.child(String.valueOf(position)).getValue(Personas.class);
-                                //getupdatesEliminar(dataSnapshot, position, personasdb);
-                                personasdb.child(mailsincom).removeValue();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-                });
+                eliminarUsuario();
 
                 break;
 
@@ -175,6 +139,10 @@ public class MainActivity extends AppCompatActivity {
                         new Intent(MainActivity.this,login.class);
                 startActivity(intent);
                 finish();
+                break;
+
+            case R.id.action_edit:
+                editar();
                 break;
         }
 
@@ -256,29 +224,65 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void getupdatesEliminar(DataSnapshot dataSnapshot, int position, DatabaseReference reference) {
+    public void eliminarUsuario ()
+    {
+        Toast.makeText(this, "Selecciona que persona eliminar", Toast.LENGTH_SHORT).show();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
 
-        ArrayList<Personas> personas = new ArrayList<Personas>();
-        adapter1 = new Adapter1(this,personas);
-        listView.setAdapter(adapter1);
+                if (position == 0)
+                {
+                    return;
+                }
 
-        personas.clear();
-        personas.add(new Personas("Nombre:","Apellido:","Email:",""));
+                Adapter1 adapter = (Adapter1) listView.getAdapter();
+                ArrayList<Personas> listPersonas = adapter.getArrayList();
 
-        Personas e = new Personas();
+                String mail = String.valueOf(listPersonas.get(position).getEmail());
+                final String mailsincom = mail.replace(".com", "");
 
-        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-            Personas d = new Personas();
-            d.setNombre(ds.getValue(Personas.class).getNombre());
-            d.setApelido(ds.getValue(Personas.class).getApelido());
-            d.setEmail(ds.getValue(Personas.class).getEmail());
-            d.setPass(ds.getValue(Personas.class).getPass());
 
-            String mail = d.getEmail().toString();
-            final String mailsincom = mail.replace(".com","");
-            personasdb.child(mailsincom).removeValue();
+                personasdb.addListenerForSingleValueEvent(new ValueEventListener()
+                {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                    {
+                        personasdb.child(mailsincom).removeValue();
+                        finish();
+                    }
 
-            personas.add(d);
-        }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) { }
+                });
+            }
+        });
     }
+
+    public void editar ()
+    {
+        Toast.makeText(this, "Selecciona que persona editar", Toast.LENGTH_SHORT).show();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Adapter1 adapter = (Adapter1) listView.getAdapter();
+                ArrayList<Personas> listPersonas = adapter.getArrayList();
+
+                String mail = String.valueOf(listPersonas.get(position).getEmail());
+                String nombre = String.valueOf(listPersonas.get(position).getNombre());
+                String apellido = String.valueOf(listPersonas.get(position).getApelido());
+
+                Intent intent1 =
+                        new Intent(MainActivity.this,EditarPersona.class);
+                Bundle editar = new Bundle();
+                editar.putString("mail", mail);
+                editar.putString("nombre", nombre);
+                editar.putString("apellido", apellido);
+                intent1.putExtras(editar);
+                startActivity(intent1);
+            }
+        });
+    }
+
 }
