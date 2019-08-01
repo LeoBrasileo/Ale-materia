@@ -50,6 +50,7 @@ public class EditarPersona extends AppCompatActivity
         final String maileditar = editar.getString("mail");
         final String nombreeditar = editar.getString("nombre");
         final String apellidoeditar = editar.getString("apellido");
+        final String nombreviejo = editar.getString("nombreviejo");
 
         editName.setText(nombreeditar);
         editMail.setText(maileditar);
@@ -58,12 +59,12 @@ public class EditarPersona extends AppCompatActivity
         Registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditarUsuarioFirebase(editName.getText().toString(), editSurname.getText().toString(), editMail.getText().toString());
+                EditarUsuarioFirebase(editName.getText().toString(), editSurname.getText().toString(), editMail.getText().toString(),nombreviejo);
             }
         });
     }
 
-    private void EditarUsuarioFirebase(final String nombre, final String apellido, final String mail) {
+    private void EditarUsuarioFirebase(final String nombre, final String apellido, final String mail,final String nombreviejo) {
         if (TextUtils.isEmpty(nombre)) {
             Toast.makeText(this, "Indique un nuevo nombre", Toast.LENGTH_LONG).show();
             return;
@@ -89,6 +90,7 @@ public class EditarPersona extends AppCompatActivity
                         new Intent(EditarPersona.this,MainActivity.class);
                 Bundle bundle = EditarPersona.this.getIntent().getExtras();
                 bundle.putString("mailsincom",mailsincom);
+                bundle.putString("nombreuser",nombreviejo);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();

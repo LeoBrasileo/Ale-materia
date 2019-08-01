@@ -266,6 +266,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+
+                if (position == 0)
+                {
+                    return;
+                }
+
                 Adapter1 adapter = (Adapter1) listView.getAdapter();
                 ArrayList<Personas> listPersonas = adapter.getArrayList();
 
@@ -279,6 +285,8 @@ public class MainActivity extends AppCompatActivity {
                 editar.putString("mail", mail);
                 editar.putString("nombre", nombre);
                 editar.putString("apellido", apellido);
+                final Bundle bundle = MainActivity.this.getIntent().getExtras();
+                editar.putString("nombreviejo",bundle.getString("nombreuser"));
                 intent1.putExtras(editar);
                 startActivity(intent1);
             }
