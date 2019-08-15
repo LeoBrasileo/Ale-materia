@@ -77,7 +77,7 @@ public class RegistrarPersona extends AppCompatActivity {
             Toast.makeText(this, "Indique su E-Mail", Toast.LENGTH_LONG).show();
             return;
         }
-        final String mailsincom = mail.replace(".com","");
+        final String mailsincom = mail.replace(".","");
         personas.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

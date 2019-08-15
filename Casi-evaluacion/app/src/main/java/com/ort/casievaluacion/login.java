@@ -74,7 +74,7 @@ public class login extends AppCompatActivity {
             Toast.makeText(this, "Se debe ingresar una contraseña", Toast.LENGTH_LONG).show();
             return;
         }
-        final String mailsincom = mail.replace(".com","");
+        final String mailsincom = mail.replace(".","");
 
         personas.addListenerForSingleValueEvent(new ValueEventListener()
         {

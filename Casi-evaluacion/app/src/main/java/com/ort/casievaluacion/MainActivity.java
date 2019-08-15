@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<Personas> listPersonas = adapter.getArrayList();
 
                 String mail = String.valueOf(listPersonas.get(position).getEmail());
-                final String mailsincom = mail.replace(".com", "");
+                final String mailsincom = mail.replace(".", "");
 
 
                 personasdb.addListenerForSingleValueEvent(new ValueEventListener()
