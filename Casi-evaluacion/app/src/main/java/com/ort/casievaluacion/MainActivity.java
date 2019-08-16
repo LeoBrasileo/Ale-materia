@@ -226,14 +226,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void eliminarUsuario ()
     {
-        Toast.makeText(this, "Selecciona que persona eliminar", Toast.LENGTH_SHORT).show();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
+        Toast.makeText(this, "Mantenga presionado a quien desee eliminar", Toast.LENGTH_SHORT).show();
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0)
                 {
-                    return;
+                    return false;
                 }
 
                 Adapter1 adapter = (Adapter1) listView.getAdapter();
@@ -255,8 +255,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) { }
                 });
+                return false;
             }
         });
+
     }
 
     public void editar ()
