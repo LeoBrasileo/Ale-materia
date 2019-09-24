@@ -29,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listView1);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ArrayList<ObjetoMateria> materias = new ArrayList<ObjetoMateria>();
+        materias.add(new ObjetoMateria("Matematica",5,4,8,false,false,false));
+        materias.add(new ObjetoMateria("Literatura",6,7,8,false,false,false));
+        materias.add(new ObjetoMateria("Biologia",6,3,6,false,false,false));
+        materias.add(new ObjetoMateria("Historia",9,10,1,false,false,false));
+        materias.add(new ObjetoMateria("Analógica con Maxim",3,2,3,false,false,false));
+        materias.add(new ObjetoMateria("Analógica sin Maxim",10,9,10,false,false,false));
     }
 
     class Adapter extends ArrayAdapter<ObjetoMateria>
