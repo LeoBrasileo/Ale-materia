@@ -18,25 +18,67 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    Boolean visNOTA1 = false;
+    Boolean visNOTA2 = false;
+    Boolean visNOTA3 = false;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button bt1 = (Button) findViewById(R.id.button1);
-        Button bt2 = (Button) findViewById(R.id.button2);
-        Button bt3 = (Button) findViewById(R.id.button3);
-        ListView listView = (ListView) findViewById(R.id.listView1);
+        final ListView listView = (ListView) findViewById(R.id.listView1);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Button bt1 = (Button) toolbar.findViewById(R.id.button1);
+        Button bt2 = (Button) toolbar.findViewById(R.id.button2);
+        Button bt3 = (Button) toolbar.findViewById(R.id.button3);
         setSupportActionBar(toolbar);
 
-        ArrayList<ObjetoMateria> materias = new ArrayList<ObjetoMateria>();
-        materias.add(new ObjetoMateria("Matematica",5,4,8,false,false,false));
-        materias.add(new ObjetoMateria("Literatura",6,7,8,false,false,false));
-        materias.add(new ObjetoMateria("Biologia",6,3,6,false,false,false));
-        materias.add(new ObjetoMateria("Historia",9,10,1,false,false,false));
-        materias.add(new ObjetoMateria("Analógica con Maxim",3,2,3,false,false,false));
-        materias.add(new ObjetoMateria("Analógica sin Maxim",10,9,10,false,false,false));
+        bt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<ObjetoMateria> materias = new ArrayList<ObjetoMateria>();
+                materias.add(new ObjetoMateria("Matematica",5,4,8,true,false,false));
+                materias.add(new ObjetoMateria("Literatura",6,7,8,true,false,false));
+                materias.add(new ObjetoMateria("Biologia",6,3,6,true,false,false));
+                materias.add(new ObjetoMateria("Historia",9,10,1,true,false,false));
+                materias.add(new ObjetoMateria("Analógica con Maxim",3,2,3,true,false,false));
+                materias.add(new ObjetoMateria("Analógica sin Maxim",10,9,10,true,false,false));
+
+                Adapter adapter = new Adapter(MainActivity.this,materias);
+                listView.setAdapter(adapter);
+            }
+        });
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<ObjetoMateria> materias = new ArrayList<ObjetoMateria>();
+                materias.add(new ObjetoMateria("Matematica",5,4,8,false,true,false));
+                materias.add(new ObjetoMateria("Literatura",6,7,8,false,true,false));
+                materias.add(new ObjetoMateria("Biologia",6,3,6,false,true,false));
+                materias.add(new ObjetoMateria("Historia",9,10,1,false,true,false));
+                materias.add(new ObjetoMateria("Analógica con Maxim",3,2,3,false,true,false));
+                materias.add(new ObjetoMateria("Analógica sin Maxim",10,9,10,false,true,false));
+
+                Adapter adapter = new Adapter(MainActivity.this,materias);
+                listView.setAdapter(adapter);
+            }
+        });
+        bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<ObjetoMateria> materias = new ArrayList<ObjetoMateria>();
+                materias.add(new ObjetoMateria("Matematica",5,4,8,false,false,true));
+                materias.add(new ObjetoMateria("Literatura",6,7,8,false,false,true));
+                materias.add(new ObjetoMateria("Biologia",6,3,6,false,false,true));
+                materias.add(new ObjetoMateria("Historia",9,10,1,false,false,true));
+                materias.add(new ObjetoMateria("Analógica con Maxim",3,2,3,false,false,true));
+                materias.add(new ObjetoMateria("Analógica sin Maxim",10,9,10,false,false,true));
+
+                Adapter adapter = new Adapter(MainActivity.this,materias);
+                listView.setAdapter(adapter);
+            }
+        });
     }
 
     class Adapter extends ArrayAdapter<ObjetoMateria>
@@ -84,6 +126,27 @@ public class MainActivity extends AppCompatActivity {
             else
             {
                 holder = (ViewHolder)item.getTag();
+            }
+
+            if (listMaterias.get(position).isVisNot1() == true)
+            {
+                holder.nota1.setVisibility(View.VISIBLE);
+            }else {
+                holder.nota1.setVisibility(View.INVISIBLE);
+            }
+
+            if (listMaterias.get(position).isVisNot2() == true)
+            {
+                holder.nota2.setVisibility(View.VISIBLE);
+            }else {
+                holder.nota2.setVisibility(View.INVISIBLE);
+            }
+
+            if (listMaterias.get(position).isVisNot3() == true)
+            {
+                holder.nota3.setVisibility(View.VISIBLE);
+            }else {
+                holder.nota3.setVisibility(View.INVISIBLE);
             }
 
             holder.txtMateria.setText(listMaterias.get(position).getNombreMateria());
