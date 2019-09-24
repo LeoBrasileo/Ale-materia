@@ -1,12 +1,20 @@
 package com.leobrasileo.tp3ertrimestre;
 
+import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,5 +29,60 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listView1);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    class Adapter extends ArrayAdapter<ObjetoMateria>
+    {
+
+        private Activity context;
+        public ArrayList<ObjetoMateria> listMaterias;
+
+        class ViewHolder
+        {
+            TextView txtMateria;
+            TextView nota1;
+            TextView nota2;
+            TextView nota3;
+        }
+
+        Adapter(Activity context,ArrayList<ObjetoMateria> listMaterias)
+        {
+            super(context, R.layout.item_materias, listMaterias);
+            this.context = context;
+            this.listMaterias = listMaterias;
+        }
+
+        public ArrayList<ObjetoMateria> getArrayList() {
+            return listMaterias;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            View item = convertView;
+            ViewHolder holder;
+
+            if(item == null)
+            {
+                LayoutInflater inflater = context.getLayoutInflater();
+                item = inflater.inflate(R.layout.item_materias, null);
+
+                holder = new ViewHolder();
+                holder.txtMateria = item.findViewById(R.id.textViewMat);
+                holder.nota1 = item.findViewById(R.id.textViewnot1);
+                holder.nota2 = item.findViewById(R.id.textViewnot2);
+                holder.nota3 = item.findViewById(R.id.textViewnot3);
+                item.setTag(holder);
+            }
+            else
+            {
+                holder = (ViewHolder)item.getTag();
+            }
+
+            holder.txtMateria.setText(listMaterias.get(position).getNombreMateria());
+            holder.nota1.setText(String.valueOf(listMaterias.get(position).getNota1()));
+            holder.nota2.setText(String.valueOf(listMaterias.get(position).getNota2()));
+            holder.nota3.setText(String.valueOf(listMaterias.get(position).getNota3()));
+            return(item);
+        }
     }
 }
