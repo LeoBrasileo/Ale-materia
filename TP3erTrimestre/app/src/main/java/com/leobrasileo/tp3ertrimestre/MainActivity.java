@@ -2,6 +2,8 @@ package com.leobrasileo.tp3ertrimestre;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +19,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.leobrasileo.tp3ertrimestre.Database.ProductosSQLiteHelper;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private SQLiteDatabase db;
+    private ProductosSQLiteHelper pdbh;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.listView1);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        pdbh = new ProductosSQLiteHelper(this, "MyDatabase.db", null, 1);
+        db = pdbh.getWritableDatabase();
+
+        ArrayList<Producto> productos = new ArrayList<Producto>();
+        productos.add(new Producto("manzanas", "5", "$900"));
+        Adapter adapter = new Adapter(MainActivity.this,productos);
+        listView.setAdapter(adapter);
     }
 
     public boolean onCreateOptionsMenu(Menu menu)
