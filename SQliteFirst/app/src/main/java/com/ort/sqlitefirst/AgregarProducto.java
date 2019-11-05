@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class AgregarProducto extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //hacer lista que se llene de datos provenientes de la base de datos
-        //listado de productos
+        setContentView(R.layout.activity_agregar_producto);
     }
 }
