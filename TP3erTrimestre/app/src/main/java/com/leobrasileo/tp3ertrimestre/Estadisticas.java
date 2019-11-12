@@ -51,5 +51,19 @@ public class Estadisticas extends AppCompatActivity {
             String precioString = precio34.toString();
             textValtotProd.setText("Valor total de todo: $" + precioString);
         }
+
+        if (cursor.moveToFirst())
+        {
+            int valmax = cursor.getCount();
+            int stocktotal = 0;
+            do {
+                String cantidad = cursor.getString(1);
+                int cantint = Integer.valueOf(cantidad);
+                stocktotal = stocktotal + cantint;
+            }while (cursor.moveToNext());
+            Integer sochhi = stocktotal;
+            String stringstock = sochhi.toString();
+            textStocktotProd.setText("Stock total: " + stringstock);
+        }
     }
 }
