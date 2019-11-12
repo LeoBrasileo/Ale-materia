@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteDatabase db;
     private ProductosSQLiteHelper pdbh;
     private Cursor cursor;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,12 +38,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final ListView listView = (ListView) findViewById(R.id.listView1);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        fab = findViewById(R.id.floatingActionButton);
         setSupportActionBar(toolbar);
         pdbh = new ProductosSQLiteHelper(this, "MyDatabase.db", null, 1);
         db = pdbh.getWritableDatabase();
 
         ArrayList<Producto> productos = new ArrayList<Producto>();
-        productos.add(new Producto("manzanas", "5", "$900"));
+        productos.add(new Producto("Nombre de producto:", "Cantidad:", "Precio unitario:"));
+        productos.add(new Producto("", "", "")); //dejo un espacio por comodidad
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AgregarProducto.class);
+                startActivity(intent);
+            }
+        });
+
+        String[] campos = new String[] {"nombre", "cantidad", "precio"};
+        Cursor cursor = db.query("Productos",campos,null,null,null,null,null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                String nombre = cursor.getString(0);
+                String cantidad = cursor.getString(1);
+                String precio = cursor.getString(2);
+                productos.add(new Producto(nombre, cantidad, precio));
+            }while (cursor.moveToNext());
+        }
+
         Adapter adapter = new Adapter(MainActivity.this,productos);
         listView.setAdapter(adapter);
     }
