@@ -13,7 +13,6 @@ public class Estadisticas extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView textValtotProd;
     private TextView textStocktotProd;
-    private TextView textcantProd;
     private TextView alarma;
     private SQLiteDatabase db;
     private ProductosSQLiteHelper pdbh;
@@ -29,7 +28,6 @@ public class Estadisticas extends AppCompatActivity {
 
         textValtotProd = findViewById(R.id.textView4);
         textStocktotProd = findViewById(R.id.textView5);
-        textcantProd = findViewById(R.id.textView7);
         alarma = findViewById(R.id.textView6);
 
         pdbh = new ProductosSQLiteHelper(this, "MyDatabase.db", null, 1);
