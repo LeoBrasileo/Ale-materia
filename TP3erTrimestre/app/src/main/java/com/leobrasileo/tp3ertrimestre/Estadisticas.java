@@ -36,5 +36,22 @@ public class Estadisticas extends AppCompatActivity {
         db = pdbh.getWritableDatabase();
         String[] campos = new String[] {"nombre", "cantidad", "precio"};
         cursor = db.query("Productos",campos,null,null,null,null,null);
+
+        if (cursor.moveToFirst())
+        {
+            int valmax = cursor.getCount();
+            int preciototal = 0;
+            int preciototalsuma = 0;
+            do {
+                String cantidad = cursor.getString(1);
+                String precio1 = cursor.getString(2);
+                precio1 = precio1.replace("$","");
+                preciototal = Integer.valueOf(precio1) * Integer.valueOf(cantidad);
+                preciototalsuma = preciototalsuma + preciototal;
+            }while (cursor.moveToNext());
+            Integer precio34 = preciototalsuma;
+            String precioString = precio34.toString();
+            textValtotProd.setText("Valor total de todo: $" + precioString);
+        }
     }
 }
