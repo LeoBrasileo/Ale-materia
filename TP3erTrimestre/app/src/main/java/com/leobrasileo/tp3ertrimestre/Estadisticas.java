@@ -65,5 +65,23 @@ public class Estadisticas extends AppCompatActivity {
             String stringstock = sochhi.toString();
             textStocktotProd.setText("Stock total: " + stringstock);
         }
+
+        if (cursor.moveToFirst())
+        {
+            int valmax = cursor.getCount();
+            int stocktotal = 0;
+            String faltantes = "";
+            do {
+                String nombre = cursor.getString(0);
+                String cantidad = cursor.getString(1);
+                int cantint = Integer.valueOf(cantidad);
+                stocktotal = stocktotal + cantint;
+                if (cantint <= 1)
+                {
+                    faltantes = faltantes + " " + nombre;
+                    alarma.setText("Hay escazes de:" + faltantes);
+                }
+            }while (cursor.moveToNext());
+        }
     }
 }
